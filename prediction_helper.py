@@ -6,17 +6,11 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 # Path to the saved model and its components
-MODEL_PATH = 'model_data.joblib'
+# Get the directory where prediction_helper.py is currently located
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
-MODEL_URL = "https://raw.githubusercontent.com/ANANTA678/Credit-Risk-Model/main/your_model_file.joblib"
-
-# Automatically download the model if it doesn't exist locally in the container
-if not os.path.exists(MODEL_PATH):
-    print("Downloading model from GitHub...")
-    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
-
-# Load the model
-model_data = joblib.load(MODEL_PATH)
+# Path to the saved model inside the 'artifacts' folder
+MODEL_PATH = os.path.join(current_dir, 'artifacts', 'model_data.joblib')
 
 # Load the model and its components
 model_data = joblib.load(MODEL_PATH)
