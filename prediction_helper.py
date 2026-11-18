@@ -1,10 +1,22 @@
 import joblib
+import os
+import urllib.request
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 # Path to the saved model and its components
-MODEL_PATH = 'artifacts/model_data.joblib'
+MODEL_PATH = 'model_data.joblib'
+
+MODEL_URL = "https://raw.githubusercontent.com/ANANTA678/Credit-Risk-Model/main/your_model_file.joblib"
+
+# Automatically download the model if it doesn't exist locally in the container
+if not os.path.exists(MODEL_PATH):
+    print("Downloading model from GitHub...")
+    urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+
+# Load the model
+model_data = joblib.load(MODEL_PATH)
 
 # Load the model and its components
 model_data = joblib.load(MODEL_PATH)
